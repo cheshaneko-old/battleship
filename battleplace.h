@@ -11,6 +11,7 @@ class battleplace{
         int type_of_ship[5];
         int size;
         bool in_battle(std::pair<char, int> unit);
+        bool ship_check(ship unit);
     public:
         battleplace();
         int add_ship(ship unit); 

@@ -8,6 +8,10 @@ battleplace::battleplace(){
 }
 
 int battleplace::add_ship(ship unit){
+    if(!ship_check(unit)){
+        std::cerr << "broken ship\n";
+        return 1;
+    }
     int size_of_ship = unit.points.size();
     if(!((size_of_ship<=4) && (size_of_ship>=1))){
         std::cerr << "Ship don't added cose ship > 4 or <0\n";
@@ -73,4 +77,35 @@ battleplace::state battleplace::shoot(std::pair<char, int> unit){
         }
     }
     return nohit;
+}
+
+bool battleplace::ship_check(ship unit){
+    for(int i = 0; i < unit.points.size(); ++i){
+        if(!((unit.points[i].first<='j') &&\
+             (unit.points[i].first>='a') &&\
+             (unit.points[i].second>=1)  &&\
+             (unit.points[i].second<=10))){
+            std::cerr << "point outside of field\n";
+            return false;
+        }
+    }
+    if(!unit.points.empty()){
+        char ctmp = unit.points[0].first;
+        int itmp = unit.points[0].second;
+        bool f_check = true;
+        bool s_check = true;
+        for(int i = 0; i < unit.points.size(); ++i){
+            if(unit.points[i].first!=ctmp)
+                f_check = false;
+            if(unit.points[i].second!=itmp)
+                s_check = false;
+        }
+        return f_check || s_check;
+    }
+    else{
+        std::cerr << "Empty ship\n";
+        return false;
+    }
+    std::cerr << "something wrong\n";
+    return false;
 }
