@@ -114,7 +114,9 @@ std::pair<char, int> battlebot::shoot(battleplace::state last_hit, std::pair<cha
         for(int i = 0; i < 3; ++i){
             for(int j = 0; j < 3; ++j){
                 if(delete_point(std::pair<char,int>(last_hit_point.first+i%3-1,last_hit_point.second+j%3-1))){
-                    points_on_hit.push_back(std::pair<char,int>(last_hit_point.first+i%3-1,last_hit_point.second+j%3-1));
+  					if(((i%3-1) == 0) || ((j%3-1) == 0)){
+						points_on_hit.push_back(std::pair<char,int>(last_hit_point.first+i%3-1,last_hit_point.second+j%3-1));
+					}
                 }
             }
         }
