@@ -8,6 +8,7 @@ class battlebot{
         battleplace my_battleplace;
         bool delete_point(std::pair<char, int> point);
         std::pair<char, int> previous_hit_point;
+        battleplace create_battleplace();
     public:
         battlebot();
         std::pair<char, int> shoot(battleplace::state last_hit, std::pair<char, int> last_hit_point);
