@@ -36,8 +36,10 @@ int battleplace::add_ship(ship unit){
             || in_battle(std::pair<char, int>(unit.points[i].first+1,unit.points[i].second-1))\
             || in_battle(std::pair<char, int>(unit.points[i].first,unit.points[i].second-1))\
             
-        )
+        ){
+            std::cerr << "Ship don't added cose ships intersect\n";
             return 1;
+        }
     }
         ships[size] = unit;
         size++;
