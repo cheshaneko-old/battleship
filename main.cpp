@@ -1,30 +1,49 @@
-#include "battleplace.h"
+#include "battlebot.h"
 #include <iostream>
+void go_player_action(battleplace& bot_p);
+void go_bot_action(battlebot& bot);
 int main(){
-    battleplace some;
-    battleplace::ship a;
-    battleplace::ship b;
-    a.points.push_back(std::pair<char,int>('e',4));
-    a.points.push_back(std::pair<char,int>('f',4));
-    a.points.push_back(std::pair<char,int>('g',4));
-    a.points.push_back(std::pair<char,int>('h',4));
-    
-    b.points.push_back(std::pair<char,int>('c',6));
-    b.points.push_back(std::pair<char,int>('c',7));
-    b.points.push_back(std::pair<char,int>('c',8));
-    
-    some.add_ship(a);
-    some.add_ship(b);
-    
-    char ctmp;
-    int itmp;
+    battlebot bot;
+    battleplace bot_p = bot.get_battleplace();
+    enum action {bot_action, player_action};
+    action act = player_action;
     while(1){
-		std::cout << "Enter: ";
-		std::cin >> ctmp;
-		std::cin >> itmp;
-		std::cout << some.shoot(std::pair<char,int>(ctmp, itmp)) << "\n";
-		
-	}
-    
+        if(act == player_action){
+            go_player_action(bot_p);
+            act = bot_action;
+        }
+        else {
+            go_bot_action(bot);
+            act = player_action;
+        }
+    }
     return 0;
 }
+
+void go_player_action(battleplace& bot_p){
+    int i_tmp;
+    char c_tmp;
+    std::cout << "Enter point ";
+    std::cin >> c_tmp >> i_tmp;
+    int tmp;
+    tmp = bot_p.shoot(std::pair<char,int>(c_tmp, i_tmp));
+    std::cout << tmp << "\n";
+    if(tmp > 0){
+        go_player_action(bot_p);
+    }
+    return;
+}
+
+void go_bot_action(battlebot& bot){
+    static int state_last_hit = 0;
+    static std::pair<char, int> point_last_hit;
+    point_last_hit = bot.shoot((battleplace::state)state_last_hit, point_last_hit);
+    std::cout << "Bot shoot on: " << point_last_hit.first << " " << point_last_hit.second << "\n" << "Enter state: ";
+    std::cin >> state_last_hit;
+    if(state_last_hit > 0){
+        go_bot_action(bot);
+    }
+    return;
+}
+
+
