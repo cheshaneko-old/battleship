@@ -1,3 +1,5 @@
+#ifndef CLASS_BATTLEPLACE
+#define CLASS_BATTLEPLACE
 #include <vector>
 #include <utility>
 #include <iostream>
@@ -18,4 +20,4 @@ class battleplace{
         enum state {nohit, hit, sunk, win};
         state shoot(std::pair<char, int>);
 };
-
+#endif //CLASS_BATTLEPLACE

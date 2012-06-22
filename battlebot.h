@@ -1,3 +1,5 @@
+#ifndef CLASS_BATTLEBOT
+#define CLASS_BATTLEBOT
 #include <vector>
 #include <utility>
 #include "battleplace.h"
@@ -14,6 +16,6 @@ class battlebot{
         std::pair<char, int> shoot(battleplace::state last_hit, std::pair<char, int> last_hit_point);
         battleplace get_battleplace();
 };
-
+#endif //CLASS_BATTLEBOT
 
 
