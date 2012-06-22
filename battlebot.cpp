@@ -1,5 +1,6 @@
 #include "battlebot.h"
 #include <cstdlib>
+
 battlebot::battlebot(){
     for(int i = 0; i < 100; ++i){
         points.push_back(std::pair<char,int>('a'+i/10,i%10+1));
@@ -18,8 +19,8 @@ battleplace battlebot::create_battleplace(){
     }
     for(int i = 1; i < 5;  ++i){
         while(ship_types[i]){
-		bool c_s = true;
-		while(c_s){
+        bool c_s = true;
+        while(c_s){
             int n_start = random()%my_points.size();
             std::pair<char, int> start = my_points[n_start];
             my_s.points.push_back(start);
@@ -59,8 +60,8 @@ battleplace battlebot::create_battleplace(){
                 }
             }
             if(my_s.points.size()==i){
-				c_s = false;
-			}
+                c_s = false;
+            }
             
          }
             for(int r = 0; r < my_s.points.size(); ++r){
@@ -77,16 +78,13 @@ battleplace battlebot::create_battleplace(){
                     }
                 }
             }
-			my_p.add_ship(my_s);
-			ship_types[i]--;
+            my_p.add_ship(my_s);
+            ship_types[i]--;
             my_s.points.clear();
         }
     }
     return my_p;
 }
-
-
-
 
 battleplace battlebot::get_battleplace(){
     return my_battleplace;
@@ -114,9 +112,9 @@ std::pair<char, int> battlebot::shoot(battleplace::state last_hit, std::pair<cha
         for(int i = 0; i < 3; ++i){
             for(int j = 0; j < 3; ++j){
                 if(delete_point(std::pair<char,int>(last_hit_point.first+i%3-1,last_hit_point.second+j%3-1))){
-  					if(((i%3-1) == 0) || ((j%3-1) == 0)){
-						points_on_hit.push_back(std::pair<char,int>(last_hit_point.first+i%3-1,last_hit_point.second+j%3-1));
-					}
+                    if(((i%3-1) == 0) || ((j%3-1) == 0)){
+                        points_on_hit.push_back(std::pair<char,int>(last_hit_point.first+i%3-1,last_hit_point.second+j%3-1));
+                    }
                 }
             }
         }
@@ -135,9 +133,9 @@ std::pair<char, int> battlebot::shoot(battleplace::state last_hit, std::pair<cha
         for(int i = 0; i < 3; ++i){
             for(int j = 0; j < 3; ++j){
                 if(delete_point(std::pair<char,int>(last_hit_point.first+i%3-1,last_hit_point.second+j%3-1))){
-					if(((i%3-1) == 0) || ((j%3-1) == 0)){
-						points_on_hit.push_back(std::pair<char,int>(last_hit_point.first+i%3-1,last_hit_point.second+j%3-1));
-					}
+                    if(((i%3-1) == 0) || ((j%3-1) == 0)){
+                        points_on_hit.push_back(std::pair<char,int>(last_hit_point.first+i%3-1,last_hit_point.second+j%3-1));
+                    }
                 }
             }
         }
@@ -185,7 +183,7 @@ std::pair<char, int> battlebot::shoot(battleplace::state last_hit, std::pair<cha
     }
 
     if(last_hit==battleplace::sunk){
-		delete_point(last_hit_point);
+        delete_point(last_hit_point);
         for(int i = 0; i < 3; ++i){
             for(int j = 0; j < 3; ++j){
                 delete_point(std::pair<char,int>(last_hit_point.first+i%3-1,last_hit_point.second+j%3-1));
@@ -195,11 +193,3 @@ std::pair<char, int> battlebot::shoot(battleplace::state last_hit, std::pair<cha
         points_on_hit.clear();
         return  points[random()%points.size()];
 }
-
-
-
-
-
-                
-
-

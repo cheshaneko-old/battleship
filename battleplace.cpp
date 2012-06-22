@@ -1,4 +1,5 @@
 #include "battleplace.h"
+
 battleplace::battleplace(){
     size = 0;
     type_of_ship[1]=4;

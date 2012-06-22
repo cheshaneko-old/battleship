@@ -3,8 +3,9 @@
 #include <vector>
 #include <utility>
 #include <iostream>
+
 class battleplace{
-	public:
+    public:
         struct ship{
             std::vector<std::pair<char, int> > points;
         };
@@ -20,4 +21,5 @@ class battleplace{
         enum state {nohit, hit, sunk, win};
         state shoot(std::pair<char, int>);
 };
+
 #endif //CLASS_BATTLEPLACE
